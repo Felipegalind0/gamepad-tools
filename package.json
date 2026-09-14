@@ -1,0 +1,67 @@
+{
+  "name": "@felipegalind0/gamepad-tools",
+  "private": false,
+  "version": "0.1.0",
+  "description": "Gamepad input snapshot, profile and binding toolkit for foss-earth and 0sfs",
+  "type": "module",
+  "license": "MIT",
+  "keywords": [
+    "gamepad",
+    "bindings",
+    "foss-earth",
+    "0sfs",
+    "webgpu",
+    "babylon"
+  ],
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "sideEffects": [
+    "./src/styles.css"
+  ],
+  "files": [
+    "dist",
+    "src",
+    "README.md",
+    "TODO.md",
+    "LICENSE",
+    "docs",
+    "ASSETS.md"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "demo": "vite demo"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./core": {
+      "types": "./dist/core/index.d.ts",
+      "import": "./dist/core/index.js"
+    },
+    "./browser": {
+      "types": "./dist/browser/index.d.ts",
+      "import": "./dist/browser/index.js"
+    },
+    "./viewer": {
+      "types": "./dist/viewer/index.d.ts",
+      "import": "./dist/viewer/index.js"
+    },
+    "./ui": {
+      "types": "./dist/ui/index.d.ts",
+      "import": "./dist/ui/index.js"
+    },
+    "./styles.css": "./src/styles.css"
+  },
+  "peerDependencies": {
+    "@babylonjs/core": "^8.21.1"
+  },
+  "devDependencies": {
+    "@babylonjs/core": "^8.21.1",
+    "typescript": "^5.9.3",
+    "vite": "^8.0.1"
+  }
+}
