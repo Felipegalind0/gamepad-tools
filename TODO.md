@@ -1,12 +1,11 @@
 # Gamepad Tools implementation
 
-The repository currently contains the implementation handoff. These tasks have not been completed.
-
 ## Required first implementation
 
-- [ ] Define a host-neutral action catalog, source snapshot and versioned binding schema.
+- [x] Define a host-neutral action catalog, source snapshot and versioned binding schema.
+- [x] Scaffold a pure core package with snapshot, profile parsing and binding evaluation.
 - [ ] Implement keyboard/gamepad acquisition, explicit device selection and a single source owner per host.
-- [ ] Implement transforms, command edges, rate/absolute intents, conflicts and validated profile persistence/import/export.
+- [ ] Implement transforms, command edges, rate/absolute/value intents, conflicts and validated profile persistence/import/export.
 - [ ] Build action-first and control-first binding capture, with host-effect suppression and usable numeric live feedback.
 - [ ] Add an original articulated Babylon/WebGPU controller viewer that can be hidden without disabling bindings.
 - [ ] Add standard Xbox/PlayStation labels and generic numeric controls for unknown layouts.
