@@ -26,6 +26,9 @@ The `exports` map offers:
     a control already held when capture starts cannot become the new binding.
   - `createProfileStore`, which keeps profiles per host in `localStorage`, or in memory when that is
     unavailable.
+  - `createGamepadResponseController`, the application-wide response preference that chooses the
+    deadzone shape a transform is asked for and whether an axis chases the stick over a response
+    time or tracks it outright. A host that already saved this setting passes its own `storageKey`.
 - **`/browser`**:
   - `createBrowserInputSource`, which samples the keyboard and gamepads, ignores typing in form
     fields, picks a controller itself and takes an explicit `selectDevice`.
