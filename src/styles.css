@@ -44,7 +44,12 @@
 .gt-profile-row { flex-wrap: nowrap; align-items: flex-end; }
 .gt-profile-field { display: grid; gap: 5px; flex: 1; min-width: 0; }
 .gt-field-label { color: var(--gt-muted); font-size: 12px; }
-.gt-profile-field input, .gt-profile-field select { width: 100%; min-width: 0; font: inherit; }
+.gt-profile-field input { width: 100%; min-width: 0; font: inherit; }
+/* A dropdown is as wide as its own text - its longest option - and never
+   stretched to fill its row; it may shrink to fit a narrow panel. */
+.gt-profile-field select, .gt-device-row select {
+  justify-self: start; width: auto; max-width: 100%; min-width: 0; font: inherit;
+}
 .gt-profile-menu { position: relative; flex: 0 0 auto; }
 .gt-menu-toggle { display: grid; place-items: center; width: 36px; height: 36px; list-style: none; }
 .gt-menu-toggle::-webkit-details-marker { display: none; }
@@ -69,7 +74,7 @@
 .gt-menu-item:disabled { opacity: 0.4; cursor: default; }
 .gt-menu-transfer { border-top: 1px solid var(--gt-line); margin-top: 4px; padding-top: 4px; }
 .gt-device-row > label:first-child { display: grid; gap: 5px; flex: 1; min-width: 0; }
-.gt-device-row select { width: 100%; min-width: 0; text-overflow: ellipsis; }
+.gt-device-row select { text-overflow: ellipsis; }
 .gt-button, .gt-raw-control {
   min-height: 32px;
   color: var(--gt-ink);
