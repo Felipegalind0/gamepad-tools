@@ -81,6 +81,16 @@ Both apps link this repository from a sibling folder, `file:../Felipegalind0/gam
 `npm run build` again after changing `src/`. They read the rebuilt `dist/` without reinstalling.
 `styles.css` is the one export served straight from `src/`.
 
+## Versions
+
+This package, FOSS Earth and 0sfs name their versions alike, from the commit: the last two
+digits of the year, the month, the day, and the commit's count among that day's commits, so
+`26.10.7.2` is the second commit of 7 October 2026. It is read from the history, never kept
+by hand: an app built with FOSS Earth's `builtFrom()` shows it for this package in its About
+tab, beside the commit. `package.json` keeps `0.1.0`, since npm takes three numbers.
+[FOSS Earth's diagnostics](../../foss-earth/docs/diagnostics.md#versions) has the rule and a
+command that prints it for a checkout.
+
 ## Validation
 
 - This repository has no tests. `npm run typecheck` and `npm run build` pass.
