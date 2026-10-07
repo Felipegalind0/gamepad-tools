@@ -2,6 +2,7 @@ import { sampleGamepadFrames } from "../core/inputs.js";
 import type { ControllerInputFrame } from "../core/contracts.js";
 
 export * from "./source.js";
+export * from "./controlKeys.js";
 
 export interface GamepadSourceSchedulerOptions {
   onFrame: (frame: ControllerInputFrame) => void;

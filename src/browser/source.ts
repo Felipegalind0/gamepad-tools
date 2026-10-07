@@ -8,6 +8,7 @@ import type {
   GamepadSnapshot,
   KeyboardModifierState,
 } from "../core/contracts.js";
+import { controlTakesKey } from "./controlKeys.js";
 
 export interface GamepadDeviceSelection {
   slot?: number;
@@ -17,6 +18,11 @@ export interface GamepadDeviceSelection {
 export interface BrowserInputSourceOptions {
   target?: Window;
   autoSelect?: boolean;
+  /**
+   * Leaves the focused control the keys it uses itself (controlKeys.ts): a
+   * text field every key, a slider its arrows, a button Space and Enter. The
+   * rest still reach the bindings. On unless false.
+   */
   ignoreFormInputs?: boolean;
 }
 
@@ -38,11 +44,6 @@ function modifiersFor(keys: ReadonlySet<string>, event?: KeyboardEvent): Keyboar
     alt: event?.altKey ?? (keys.has("AltLeft") || keys.has("AltRight")),
     meta: event?.metaKey ?? (keys.has("MetaLeft") || keys.has("MetaRight")),
   };
-}
-
-function isEditableTarget(target: EventTarget | null): boolean {
-  return target instanceof Element
-    && !!target.closest("input, textarea, select, [contenteditable]:not([contenteditable='false'])");
 }
 
 function pickAutoDevice(frame: ControllerInputFrame): GamepadSnapshot | undefined {
@@ -97,7 +98,7 @@ export function createBrowserInputSource(options: BrowserInputSourceOptions = {}
   };
 
   const onKeyDown = (event: KeyboardEvent): void => {
-    if (ignoreFormInputs && isEditableTarget(event.target)) {
+    if (ignoreFormInputs && controlTakesKey(event.target, event.key)) {
       return;
     }
     keys.add(event.code);

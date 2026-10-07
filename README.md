@@ -30,8 +30,14 @@ The `exports` map offers:
     deadzone shape a transform is asked for and whether an axis chases the stick over a response
     time or tracks it outright. A host that already saved this setting passes its own `storageKey`.
 - **`/browser`**:
-  - `createBrowserInputSource`, which samples the keyboard and gamepads, ignores typing in form
-    fields, picks a controller itself and takes an explicit `selectDevice`.
+  - `createBrowserInputSource`, which samples the keyboard and gamepads, leaves the focused control
+    the keys it uses, picks a controller itself and takes an explicit `selectDevice`.
+  - `controlTakesKey(target, key)` and `controlTakesEveryKey(target)`: which keys the focused
+    control uses itself, so that the bindings behind it take the rest. A text field or a dropdown
+    takes every key, a slider its arrows, Page and Home/End keys, a checkbox Space, a button Space
+    and Enter, and a control that none of these describe names its keys in `data-takes-keys`. A
+    focused trim slider then still lets W, A, S and D fly. The hosts use the same rule for their
+    own keys.
   - `createGamepadSourceScheduler`.
 - **`/ui`**: `mountBindingEditor`, which provides
   - a profile selector holding the host's built-in profiles and the saved ones, with rename,
