@@ -28,6 +28,9 @@
     "ASSETS.md"
   ],
   "scripts": {
+    "attribution:install": "node scripts/install-attribution.mjs",
+    "attribution": "node node_modules/@foss-earth/ci/bin/attribution.mjs",
+    "attribution:conformance": "node node_modules/@foss-earth/ci/bin/conformance.mjs",
     "build": "tsc -p tsconfig.build.json",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "demo": "vite demo"

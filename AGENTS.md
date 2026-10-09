@@ -1,5 +1,14 @@
 # Agent instructions
 
+YOU CANNOT HAVE AI AS A CO-AUTHOR, OR YOUR CONTRIBUTIONS WILL BE REJECTED.
+
+## Contribution policy
+
+- Never add AI author, committer or coauthor attribution. Preserve legitimate human credit and asset/license provenance; ordinary technical discussion of tools is permitted.
+- Use the exact shared `@foss-earth/ci` artifact and installed entry points described in `CONTRIBUTING.md`; do not copy its validator. Attribution applies to every change, including documentation and content.
+- Preserve dirty work and retained evidence. Scratch and logs belong in ignored `build/`. Reserve shared heavy-check capacity before conformance, full-history audits or other coordinated checks; synthetic invalid commits stay in isolated ignored fixtures.
+- Policy/caller updates use the coordinator's trusted review path. No implicit history rewrite, remote enforcement change, publication or deployment.
+
 ## Scope
 
 - Build an original controller visualization and binding toolkit specifically for foss-earth and 0sfs. Read `docs/implementation-prompt.md` before implementation.
