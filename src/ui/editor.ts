@@ -32,6 +32,13 @@ export interface BindingEditorOptions {
   /** @deprecated Supply builtInProfiles; all profiles share one selector. */
   presets?: readonly BindingEditorPreset[];
   onProfileChange?(profile: BindingProfile): void;
+  /**
+   * A host's reset for a control shown away from its default: Controller off
+   * Automatic selection, or Show 3D controller on. FOSS Earth's puts a tiny
+   * circular reset on the control's top-right corner. The editor draws its
+   * controls again after every change, so it asks only while one differs.
+   */
+  attachReset?(control: HTMLElement, reset: { label: string; reset(): void }): void;
 }
 
 export interface BindingEditorHandle {
@@ -462,8 +469,8 @@ export function mountBindingEditor(options: BindingEditorOptions): BindingEditor
       option.selected = gamepad.sessionId === currentDevice()?.sessionId;
       deviceSelect.append(option);
     }
-    deviceSelect.onchange = () => {
-      const device = source.getFrame().gamepads.find((entry) => entry.sessionId === deviceSelect!.value);
+    const selectDevice = (sessionId: string): void => {
+      const device = source.getFrame().gamepads.find((entry) => entry.sessionId === sessionId);
       source.selectDevice(device ? { slot: device.slot, sessionId: device.sessionId } : null);
       commit({
         ...profile,
@@ -472,8 +479,17 @@ export function mountBindingEditor(options: BindingEditorOptions): BindingEditor
       });
       render();
     };
+    deviceSelect.onchange = () => selectDevice(deviceSelect!.value);
     deviceLabel.append(deviceSelect);
     deviceRow.append(deviceLabel);
+    // A reset draws the controls again; the control it reset takes the focus.
+    // Automatic selection shows the device it picked, so ask the source.
+    if (source.getDeviceSelection() !== null) {
+      options.attachReset?.(deviceSelect, {
+        label: "Reset Controller to the default: Automatic selection",
+        reset: () => { selectDevice(""); deviceSelect?.focus(); },
+      });
+    }
     const viewerToggle = createElement("label", "gt-check");
     const checkbox = createElement("input") as HTMLInputElement;
     checkbox.type = "checkbox";
@@ -484,6 +500,16 @@ export function mountBindingEditor(options: BindingEditorOptions): BindingEditor
     };
     viewerToggle.append(checkbox, document.createTextNode(" Show 3D controller"));
     deviceRow.append(viewerToggle);
+    if (viewerEnabled) {
+      options.attachReset?.(checkbox, {
+        label: "Reset Show 3D controller to the default: off",
+        reset: () => {
+          viewerEnabled = false;
+          render();
+          root.querySelector<HTMLInputElement>(".gt-check input")?.focus();
+        },
+      });
+    }
     root.append(deviceRow);
 
     const statusLine = createElement("p", "gt-status");

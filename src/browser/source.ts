@@ -31,6 +31,8 @@ export interface BrowserInputSource {
   getFrame(): ControllerInputFrame;
   subscribe(listener: (frame: ControllerInputFrame) => void): () => void;
   getSelectedDevice(): GamepadSnapshot | undefined;
+  /** The device chosen with selectDevice, or null under automatic selection. */
+  getDeviceSelection(): GamepadDeviceSelection | null;
   selectDevice(selection: GamepadDeviceSelection | null): void;
   start(options?: { intervalMs?: number; useAnimationFrame?: boolean; shouldPoll?: () => boolean }): () => void;
   stop(): void;
@@ -153,6 +155,9 @@ export function createBrowserInputSource(options: BrowserInputSourceOptions = {}
     },
     getSelectedDevice() {
       return resolveSelected(current);
+    },
+    getDeviceSelection() {
+      return explicitSelection && selected ? { ...selected } : null;
     },
     selectDevice(selection) {
       selected = selection;

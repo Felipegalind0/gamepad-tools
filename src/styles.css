@@ -74,6 +74,8 @@
 .gt-menu-item:disabled { opacity: 0.4; cursor: default; }
 .gt-menu-transfer { border-top: 1px solid var(--gt-line); margin-top: 4px; padding-top: 4px; }
 .gt-device-row > label:first-child { display: grid; gap: 5px; flex: 1; min-width: 0; }
+/* The select, or a host's span around it for a reset, keeps its own width. */
+.gt-device-row > label:first-child > * { justify-self: start; max-width: 100%; min-width: 0; }
 .gt-device-row select { text-overflow: ellipsis; }
 .gt-button, .gt-raw-control {
   min-height: 32px;
